@@ -1,17 +1,23 @@
 {
-    "manifest_version": 3,
-    "name": "Dark Mode Auto",
-    "version": "1.0",
-    "description": "Automatically enables dark mode after 7 PM and allows manual control.",
-    "permissions": ["storage", "alarms", "scripting", "tabs"],
-    "background": {
-        "service_worker": "background.js" 
-    },
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "128": "apple.png"
-        }
-    },
-    "host_permissions": ["<all_urls>"]
+  "short_name": "Medium Dark",
+  "name": "Medium Dark Mode",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "128": "apple.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.medium.com/*",
+    "https://medium.com/*",
+    "https://hackernoon.com/*"
+  ],
+  "manifest_version": 3,
+  "browser_action": {
+    "default_title": "Medium Dark"
+  },
+  "version": "1.0"
 }
