@@ -1,21 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const toggleButton = document.getElementById("toggleDarkMode");
-    const statusText = document.getElementById("statusText");
+    const toggleDarkModeButton = document.getElementById("toggleDarkMode");
+    const toggleAutoModeButton = document.getElementById("toggleAutoMode");
+    const darkModeStatus = document.getElementById("darkModeStatus");
+    const autoModeStatus = document.getElementById("autoModeStatus");
     
-    chrome.storage.local.get(["darkMode", "autoActivated"], (data) => {
-        updateUI(data.darkMode, data.autoActivated);
+    chrome.storage.local.get(["darkMode", "autoActivated", "autoMode"], (data) => {
+        updateUI(data.darkMode, data.autoActivated, data.autoMode);
     });
     
-    toggleButton.addEventListener("click", () => {
+    toggleDarkModeButton.addEventListener("click", () => {
         chrome.storage.local.get("darkMode", (data) => {
             const newMode = !data.darkMode;
             chrome.storage.local.set({ darkMode: newMode });
-            updateUI(newMode, data.autoActivated);
+            updateUI(newMode, data.autoActivated, data.autoMode);
         });
     });
     
-    function updateUI(darkMode, autoActivated) {
-        statusText.textContent = `Mode sombre: ${darkMode ? "Enabled" : "Disabled"} \n Auto: ${autoActivated ? "Active" : "Inactive"}`;
-        toggleButton.textContent = darkMode ? "Enable" : "Disable";
+    toggleAutoModeButton.addEventListener("click", () => {
+        chrome.storage.local.get("autoMode", (data) => {
+            const newAutoMode = !data.autoMode;
+            chrome.storage.local.set({ autoMode: newAutoMode });
+            updateUI(data.darkMode, data.autoActivated, newAutoMode);
+        });
+    });
+    
+    function updateUI(darkMode, autoActivated, autoMode) {
+        darkModeStatus.textContent = `Dark Mode: ${darkMode ? "Enabled" : "Disabled"}`;
+        autoModeStatus.textContent = `Auto Mode: ${autoMode ? "Enabled" : "Disabled"}`;
+        toggleDarkModeButton.textContent = darkMode ? "Disable Dark Mode" : "Enable Dark Mode";
+        toggleAutoModeButton.textContent = autoMode ? "Disable Auto Mode" : "Enable Auto Mode";
     }
 });
