@@ -11,8 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleDarkModeButton.addEventListener("click", () => {
         chrome.storage.local.get("darkMode", (data) => {
             const newMode = !data.darkMode;
-            chrome.storage.local.set({ darkMode: newMode });
-            updateUI(newMode, data.autoActivated, data.autoMode);
+            chrome.storage.local.set({ darkMode: newMode }, () => {
+                applyDarkMode(newMode);
+                updateUI(newMode, false, true);
+            });
         });
     });
     
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chrome.storage.local.get("autoMode", (data) => {
             const newAutoMode = !data.autoMode;
             chrome.storage.local.set({ autoMode: newAutoMode });
-            updateUI(data.darkMode, data.autoActivated, newAutoMode);
+            updateUI(false, false, newAutoMode);
         });
     });
     
