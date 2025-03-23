@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     function updateUI(darkMode, autoActivated) {
-        statusText.textContent = `Mode sombre: ${darkMode ? "Activé" : "Désactivé"} | Auto: ${autoActivated ? "Oui" : "Non"}`;
-        toggleButton.textContent = darkMode ? "Désactiver" : "Activer";
+        statusText.textContent = `Mode sombre: ${darkMode ? "Enabled" : "Disabled"} \n Auto: ${autoActivated ? "Active" : "Inactive"}`;
+        toggleButton.textContent = darkMode ? "Enable" : "Disable";
     }
 });
