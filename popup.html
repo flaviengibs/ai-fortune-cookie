@@ -4,12 +4,15 @@
     <title>Dark Mode</title>
     <style>
         body { width: 200px; font-family: Arial, sans-serif; text-align: center; }
-        button { margin-top: 10px; padding: 5px; }
+        button { margin-top: 10px; padding: 5px; display: block; width: 100%; }
+        p { margin: 5px 0; }
     </style>
 </head>
 <body>
-    <p id="statusText">Loading...</p>
-    <button id="toggleDarkMode">Enable</button>
+    <p id="darkModeStatus">Loading...</p>
+    <p id="autoModeStatus"></p>
+    <button id="toggleDarkMode">Enable Dark Mode</button>
+    <button id="toggleAutoMode">Enable Auto Mode</button>
     <script src="popup.js"></script>
 </body>
 </html>
