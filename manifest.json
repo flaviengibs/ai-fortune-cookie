@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Dark Mode Auto",
+    "version": "1.0",
+    "description": "Active automatiquement le mode sombre après 19h et permet de le contrôler manuellement.",
+    "permissions": ["storage", "alarms", "scripting", "tabs"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128": "apple.png"
+        }
+    },
+    "host_permissions": ["<all_urls>"]
+}
