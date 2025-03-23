@@ -18,7 +18,7 @@ function checkDarkModeActivation() {
 
 function applyDarkMode(enabled) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        if (tabs.length === 0) return;
+        if (tabs.length === 0 || !tabs[0].url.startsWith("http")) return;
         chrome.scripting.executeScript({
             target: { tabId: tabs[0].id },
             function: (isDark) => {
