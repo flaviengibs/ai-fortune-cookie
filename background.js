@@ -17,18 +17,15 @@ function checkDarkModeActivation() {
 }
 
 function applyDarkMode(enabled) {
-    chrome.tabs.query({}, (tabs) => {
-        tabs.forEach((tab) => {
-            if (tab.url.startsWith('http')) {
-                chrome.scripting.executeScript({
-                    target: { tabId: tab.id },
-                    function: (enabled) => {
-                        document.documentElement.style.backgroundColor = enabled ? '#121212' : '';
-                        document.documentElement.style.color = enabled ? '#ffffff' : '';
-                    },
-                    args: [enabled]
-                });
-            }
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs.length === 0) return;
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            function: (isDark) => {
+                document.documentElement.style.backgroundColor = isDark ? '#121212' : '';
+                document.documentElement.style.color = isDark ? '#ffffff' : '';
+            },
+            args: [enabled]
         });
     });
 }
