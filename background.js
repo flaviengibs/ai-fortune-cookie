@@ -1,17 +1,19 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({ darkMode: false, autoActivated: false });
+    chrome.storage.local.set({ darkMode: false, autoActivated: false, autoMode: true });
 });
 
 function checkDarkModeActivation() {
     const now = new Date();
     const hour = now.getHours();
     
-    if (hour >= 19) {
-        chrome.storage.local.set({ darkMode: true, autoActivated: true });
-        applyDarkMode(true);
-    } else {
-        chrome.storage.local.set({ autoActivated: false });
-    }
+    chrome.storage.local.get("autoMode", (data) => {
+        if (data.autoMode && hour >= 19) {
+            chrome.storage.local.set({ darkMode: true, autoActivated: true });
+            applyDarkMode(true);
+        } else {
+            chrome.storage.local.set({ autoActivated: false });
+        }
+    });
 }
 
 function applyDarkMode(enabled) {
