@@ -1,25 +1,29 @@
-const OPENAI_API_KEY = "your_openai_api_key";  // Replace with your actual API key
-const fortuneText = document.getElementById("fortune");
-const button = document.getElementById("getFortune");
+const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY';
 
-button.addEventListener("click", async () => {
-    fortuneText.textContent = "🔮 Asking the AI...";
-    
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "system", content: "You are a wise fortune teller. Generate a fun, creative fortune." }]
-        })
-    });
+async function getFortune() {
+  const response = await fetch('https://api.openai.com/v1/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: 'text-davinci-003',
+      prompt: 'Generate a random fortune cookie.',
+      max_tokens: 60, 
+    }),
+  });
 
-    const data = await response.json();
-    const fortune = data.choices[0].message.content;
-    
-    fortuneText.textContent = fortune;
-});
+  const data = await response.json();
+  return data.choices[0].text.trim();
+}
+
+// Fonction pour afficher le fortune cookie dans le popup
+async function displayFortune() {
+  const fortune = await getFortune();
+  document.getElementById('fortune').textContent = fortune;
+}
+
+// Appeler la fonction displayFortune au chargement du popup
+displayFortune();
 
