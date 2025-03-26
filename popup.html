@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fortune Cookie</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>AI Fortune Cookie</title>
+  <style>
+    body {
+      width: 200px;
+      padding: 10px;
+    }
+    #fortune {
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-    <h2>🥠 Your AI Fortune 🥠</h2>
-    <p id="fortune">Click below to receive your wisdom!</p>
-    <button id="getFortune">🔮 Reveal Fortune</button>
-    <script src="popup.js"></script>
+  <h1>Your Daily Fortune</h1>
+  <p id="fortune">Loading...</p>
+  <script src="popup.js"></script>
 </body>
 </html>
