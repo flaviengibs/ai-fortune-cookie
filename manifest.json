@@ -2,13 +2,16 @@
   "manifest_version": 3,
   "name": "AI Fortune Cookie",
   "version": "1.0",
-  "description": "Get an AI-generated fortune every time you open a new tab!",
-  "permissions": ["storage"],
-  "host_permissions": ["https://api.openai.com/"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "128": "apple.png"
+      "16": "images/cookie16.png",
+      "48": "images/cookie48.png",
+      "128": "images/cookie128.png"
     }
+  },
+  "permissions": ["storage", "https://api.openai.com/"],
+  "icons": {
+    "128": "fortunecookie.png"
   }
 }
